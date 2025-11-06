@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<link rel="stylesheet" href="cssekaomasivu.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tietovisa</title>
+<style>
+  
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f6f8fa;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+h1 {
+  text-align: center;
+}
+button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #667;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #68b6ff;
+}
+.correct {
+  background-color: #9ef79e !important;
+}
+.wrong {
+  background-color: #f79e9e !important;
+}
+#result {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 1.3em;
+}
+</style>
+</head>
+<body>
+  <header class="bg-dark text-white p-3 text-center">
+    <h1>Tietovisa</h1>
+    <nav>
+        <a href="ekaomasivu.html">Etusivu</a> |
+        <a href="aboutoma.html">Minusta</a> |
+        <a href="kysely.html">Tietovisa</a> |
+        <a href="interests.html">Kiinnostuksen kohteet</a> |
+        <a href="contact.html">Yhteystiedot</a>
+    </nav>
+</header>
+<div class="container">
+  <h1>Tietovisa</h1>
+  <div id="quiz"></div>
+  <div id="result"></div>
+  <button id="restart" style="display:none;">Kokeile uudelleen</button>
+</div>
+
+<script>
+// --- KYSYMYKSET (19 kpl) ---
+const allQuestions = [
+  {q: "Mitä näistä olen harrastanut eniten?", options: ["Paini", "Sähly", "Kartin autoilu"], answer: "Paini"},
+  {q: "Lempi väri?", options: ["Violetti", "Valkoinen", "Musta"], answer: "Valkoinen"},
+  {q: "Mikä on seurakuntani nimi?", options: ["Coti", "Jude", "Mose"], answer: "H2O"},
+  {q: "Kuka maalasi Mona Lisan?", options: ["Michelangelo", "Leonardo da Vinci", "Van Gogh"], answer: "Leonardo da Vinci"},
+  {q: "Mikä on maailman suurin valtameri?", options: ["Atlantti", "Intian valtameri", "Tyynimeri"], answer: "Tyynimeri"},
+  {q: "Kuinka monta maata kuuluu Euroopan unioniin (2024)?", options: ["27", "28", "30"], answer: "27"},
+  {q: "Mikä eläin on Suomen kansalliseläin?", options: ["Karhu", "Susi", "Hirvi"], answer: "Karhu"},
+  {q: "Mikä on maapallon suurin manner?", options: ["Afrikka", "Aasia", "Eurooppa"], answer: "Aasia"},
+  {q: "Montako luuta on aikuisen ihmisen kehossa?", options: ["206", "305", "150"], answer: "206"},
+  {q: "Kuka on kirjoittanut Seitsemän veljestä?", options: ["Eino Leino", "Aleksis Kivi", "J. L. Runeberg"], answer: "Aleksis Kivi"},
+  {q: "Mikä on hopean kemiallinen symboli?", options: ["Ag", "Au", "Hg"], answer: "Ag"},
+  {q: "Mikä planeetta on lähinnä Aurinkoa?", options: ["Venus", "Merkurius", "Mars"], answer: "Merkurius"},
+  {q: "Kuinka monta sekuntia on tunnissa?", options: ["3600", "600", "60"], answer: "3600"},
+  {q: "Mikä on maailman korkein vuori?", options: ["K2", "Everest", "Kilimanjaro"], answer: "Everest"},
+  {q: "Kuka sävelsi Finlandian?", options: ["Jean Sibelius", "Oskar Merikanto", "Toivo Kuula"], answer: "Jean Sibelius"},
+  {q: "Mikä on tietokoneen keskussuoritin englanniksi?", options: ["CPU", "GPU", "RAM"], answer: "CPU"},
+  {q: "Mitä väriä saa sekoittamalla sinistä ja keltaista?", options: ["Vihreä", "Punainen", "Oranssi"], answer: "Vihreä"},
+  {q: "Kuinka monta mantereita on maapallolla?", options: ["5", "6", "7"], answer: "7"},
+  {q: "Mikä on maailman suurin maa pinta-alaltaan?", options: ["Kiina", "Venäjä", "Kanada"], answer: "Venäjä"}
+];
+
+// --- SATUNNAISJÄRJESTYS ---
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// --- ARVOTAAN 10 KYSYMYSTÄ ---
+const questions = shuffle(allQuestions).slice(0, 10);
+let current = 0;
+let score = 0;
+
+const quizDiv = document.getElementById('quiz');
+const resultDiv = document.getElementById('result');
+const restartBtn = document.getElementById('restart');
+
+// --- NÄYTÄ KYSYMYS ---
+function showQuestion() {
+  quizDiv.innerHTML = "";
+  if (current >= questions.length) {
+    showResult();
+    return;
+  }
+  const qObj = questions[current];
+  const qElem = document.createElement('div');
+  qElem.innerHTML = `<h3>${current + 1}. ${qObj.q}</h3>`;
+  
+  const opts = shuffle([...qObj.options]);
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(btn, qObj.answer);
+    qElem.appendChild(btn);
+  });
+  quizDiv.appendChild(qElem);
+}
+
+// --- TARKISTA VASTAUS ---
+function checkAnswer(button, correct) {
+  const buttons = quizDiv.querySelectorAll('button');
+  buttons.forEach(b => b.disabled = true);
+  
+  if (button.textContent === correct) {
+    button.classList.add('correct');
+    score++;
+  } else {
+    button.classList.add('wrong');
+    buttons.forEach(b => {
+      if (b.textContent === correct) b.classList.add('correct');
+    });
+  }
+  setTimeout(() => {
+    current++;
+    showQuestion();
+  }, 1000);
+}
+
+// --- NÄYTÄ TULOS ---
+function showResult() {
+  quizDiv.innerHTML = "";
+  let msg = "";
+  if (score >= 9) msg = "Olet tietäjä!";
+  else if (score >= 6) msg = "Voit vielä vähän kertailla tietoja.";
+  else msg = "Kannattaa jatkaa lukemista.";
+  
+  resultDiv.innerHTML = `Tuloksesi: ${score}/10 <br>${msg}`;
+  restartBtn.style.display = "block";
+}
+
+restartBtn.addEventListener("click", () => {
+  current = 0;
+  score = 0;
+  shuffle(allQuestions);
+  resultDiv.innerHTML = "";
+  restartBtn.style.display = "none";
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
