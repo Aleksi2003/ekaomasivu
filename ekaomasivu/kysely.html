@@ -72,30 +72,20 @@ button:hover {
 </div>
 
 <script>
-// --- KYSYMYKSET (19 kpl) ---
+
 const allQuestions = [
   {q: "Mitä näistä olen harrastanut eniten?", options: ["Paini", "Sähly", "Kartin autoilu"], answer: "Paini"},
   {q: "Lempi väri?", options: ["Violetti", "Valkoinen", "Musta"], answer: "Valkoinen"},
   {q: "Mikä on seurakuntani nimi?", options: ["Coti", "Jude", "Mose"], answer: "H2O"},
-  {q: "Kuka maalasi Mona Lisan?", options: ["Michelangelo", "Leonardo da Vinci", "Van Gogh"], answer: "Leonardo da Vinci"},
-  {q: "Mikä on maailman suurin valtameri?", options: ["Atlantti", "Intian valtameri", "Tyynimeri"], answer: "Tyynimeri"},
+  {q: "Mikä on lempi ruokani?", options: ["pitsa", "lohi", "pasta"], answer: "lohi"},
+  {q: "?", options: ["Atlantti", "Intian valtameri", "Tyynimeri"], answer: "Tyynimeri"},
   {q: "Kuinka monta maata kuuluu Euroopan unioniin (2024)?", options: ["27", "28", "30"], answer: "27"},
   {q: "Mikä eläin on Suomen kansalliseläin?", options: ["Karhu", "Susi", "Hirvi"], answer: "Karhu"},
   {q: "Mikä on maapallon suurin manner?", options: ["Afrikka", "Aasia", "Eurooppa"], answer: "Aasia"},
   {q: "Montako luuta on aikuisen ihmisen kehossa?", options: ["206", "305", "150"], answer: "206"},
-  {q: "Kuka on kirjoittanut Seitsemän veljestä?", options: ["Eino Leino", "Aleksis Kivi", "J. L. Runeberg"], answer: "Aleksis Kivi"},
-  {q: "Mikä on hopean kemiallinen symboli?", options: ["Ag", "Au", "Hg"], answer: "Ag"},
-  {q: "Mikä planeetta on lähinnä Aurinkoa?", options: ["Venus", "Merkurius", "Mars"], answer: "Merkurius"},
-  {q: "Kuinka monta sekuntia on tunnissa?", options: ["3600", "600", "60"], answer: "3600"},
-  {q: "Mikä on maailman korkein vuori?", options: ["K2", "Everest", "Kilimanjaro"], answer: "Everest"},
-  {q: "Kuka sävelsi Finlandian?", options: ["Jean Sibelius", "Oskar Merikanto", "Toivo Kuula"], answer: "Jean Sibelius"},
-  {q: "Mikä on tietokoneen keskussuoritin englanniksi?", options: ["CPU", "GPU", "RAM"], answer: "CPU"},
-  {q: "Mitä väriä saa sekoittamalla sinistä ja keltaista?", options: ["Vihreä", "Punainen", "Oranssi"], answer: "Vihreä"},
-  {q: "Kuinka monta mantereita on maapallolla?", options: ["5", "6", "7"], answer: "7"},
-  {q: "Mikä on maailman suurin maa pinta-alaltaan?", options: ["Kiina", "Venäjä", "Kanada"], answer: "Venäjä"}
 ];
 
-// --- SATUNNAISJÄRJESTYS ---
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -104,7 +94,7 @@ function shuffle(array) {
   return array;
 }
 
-// --- ARVOTAAN 10 KYSYMYSTÄ ---
+
 const questions = shuffle(allQuestions).slice(0, 10);
 let current = 0;
 let score = 0;
