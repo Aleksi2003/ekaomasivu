@@ -4,7 +4,7 @@ body {
   height: 100vh;
   overflow: hidden;
   position: relative;
-    animation: backgroundShift 10s infinite alternate;
+    animation: backgroundShift 6s infinite alternate;
     background: linear-gradient(45deg, #ff7b00, #00bcd4, #8e44ad);
     background-size: 400% 400%;
     transition: background 1s ease;
@@ -60,4 +60,5 @@ body::after {
     from { transform: translateX(0); }
     to { transform: translateX(-25%); }
 }
+
 
