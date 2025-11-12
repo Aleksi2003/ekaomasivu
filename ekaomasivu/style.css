@@ -4,83 +4,20 @@ body {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(180deg, #00bfff 0%, #0077be 100%);
+    animation: backgroundShift 10s infinite alternate;
+    background: linear-gradient(45deg, #ff7b00, #00bcd4, #8e44ad);
+    background-size: 400% 400%;
+    transition: background 1s ease;
 }
 
-/* Sinisen taustan pehmeä liike */
-@keyframes waterFlow {
-  0% { background-position: 0 0; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0 0; }
-}
-body {
-  background-size: 200% 200%;
-  animation: waterFlow 15s ease-in-out infinite;
-}
-
-/* Luodaan näkyvät aalto-muodot */
-body::before, body::after {
-  content: "";
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 200%;
-  height: 200px;
-  background-repeat: repeat-x;
-  opacity: 0.35;
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Ensimmäinen aalto (vaaleampi) */
-body::before {
-  background: radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.0) 70%);
-  animation: waveMove1 6s ease-in-out infinite;
-  transform-origin: bottom center;
-}
-
-/* Toinen aalto (tummempi, eri suuntaan) */
-body::after {
-  background: radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.0) 70%);
-  animation: waveMove2 8s ease-in-out infinite;
-  transform-origin: bottom center;
-}
-
-/* Aaltojen liike — ylös-alas ja sivuttain */
-@keyframes waveMove1 {
-  0%   { transform: translateX(0) translateY(0) scaleY(1); }
-  25%  { transform: translateX(-5%) translateY(-5px) scaleY(1.05); }
-  50%  { transform: translateX(-10%) translateY(5px) scaleY(0.95); }
-  75%  { transform: translateX(-5%) translateY(-5px) scaleY(1.05); }
-  100% { transform: translateX(0) translateY(0) scaleY(1); }
-}
-
-@keyframes waveMove2 {
-  0%   { transform: translateX(0) translateY(0) scaleY(1); }
-  25%  { transform: translateX(5%) translateY(6px) scaleY(0.9); }
-  50%  { transform: translateX(10%) translateY(-4px) scaleY(1.05); }
-  75%  { transform: translateX(5%) translateY(6px) scaleY(0.9); }
-  100% { transform: translateX(0) translateY(0) scaleY(1); }
-}
-
-/* Bootstrap-yhteensopiva kontti */
-.container {
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  max-width: 800px;
-  margin: 80px auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* Nappien tyyli */
-.btn-primary {
-  background-color: #0077be;
-  border: none;
-  transition: 0.3s;
-}
-.btn-primary:hover {
-  background-color: #005f99;
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
