@@ -1,26 +1,13 @@
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-    animation: backgroundShift 6s infinite alternate;
-    background: linear-gradient(45deg, #ff7b00, #00bcd4, #8e44ad);
-    background-size: 400% 400%;
-    transition: background 1s ease;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-color: #e0f7fa; /* taivas/valoisa tausta */
 }
 
-@keyframes backgroundShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+/* Luodaan veden pinta ::before-elementillä */
 body::before {
     content: "";
     position: absolute;
@@ -60,5 +47,8 @@ body::after {
     from { transform: translateX(0); }
     to { transform: translateX(-25%); }
 }
+
+
+
 
 
