@@ -94,3 +94,9 @@ footer {
     padding: 1rem;
     box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
 }
+table {
+  margin-left: auto;
+  margin-right: auto; /* Keskittää taulukon vaakasuunnassa */
+  border-collapse: collapse;
+  width: 50%;
+
