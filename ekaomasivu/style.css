@@ -1,4 +1,4 @@
-/* Yleinen sivuasettelu ja tausta */
+
 body {
     margin: 0;
     font-family: "Poppins", Arial, sans-serif;
@@ -11,14 +11,14 @@ body {
     animation: bgShift 10s ease infinite;
 }
 
-/* Taustan värinvaihto-animaatio */
+
 @keyframes bgShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Header */
+
 header {
     background: rgba(0, 0, 0, 0.7);
     color: white;
@@ -34,13 +34,13 @@ header h1 {
     animation: glow 4s ease-in-out infinite alternate;
 }
 
-/* Otsikon kevyt hehkuanimaatio */
+
 @keyframes glow {
     from { text-shadow: 0 0 5px #fff, 0 0 10px #00bcd4; }
     to { text-shadow: 0 0 20px #ff4081, 0 0 30px #ffeb3b; }
 }
 
-/* Navigaatio */
+
 nav a {
     color: #ccc;
     text-decoration: none;
@@ -53,7 +53,6 @@ nav a:hover {
     transform: scale(1.1);
 }
 
-/* Pääsisältö */
 main {
     flex: 1;
     background: rgba(255, 255, 255, 0.8);
@@ -74,7 +73,6 @@ main p {
     line-height: 1.6;
 }
 
-/* Kuva */
 img.img-thumbnail {
     border-radius: 10px;
     margin: 1rem 0;
@@ -86,7 +84,6 @@ img.img-thumbnail:hover {
     box-shadow: 0 0 20px rgba(0, 188, 212, 0.6);
 }
 
-/* Footer */
 footer {
     background: rgba(255, 255, 255, 0.7);
     color: #333;
@@ -98,5 +95,6 @@ table {
   margin-left: auto;
   margin-right: auto;
 }
+
 
 
