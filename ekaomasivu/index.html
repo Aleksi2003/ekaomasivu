@@ -30,14 +30,21 @@
 <p> </p>
 <h2>Palautelomake</h2>
 
-<form action="mailto:oma.sahkoposti@esimerkki.com" method="post" enctype="text/plain">
-    <label for="email">Sähköposti:</label>
-    <input type="email" id="email" name="Sähköposti" required>
+<h2>Palautelomake</h2>
 
-    <label for="message">Palaute:</label>
-    <textarea id="message" name="Palaute" rows="5" required></textarea>
+<form action="mailto:oma.sahkoposti@esimerkki.com" method="post" enctype="text/plain" class="mt-3">
 
-    <button type="submit">Lähetä</button>
+    <div class="mb-3">
+        <label for="email" class="form-label">Sähköposti</label>
+        <input type="email" class="form-control" id="email" name="Sähköposti" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="message" class="form-label">Palaute</label>
+        <textarea class="form-control" id="message" name="Palaute" rows="5" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lähetä</button>
 </form>
     </main>
 <footer class="bg-light text-center p-3 mt-5">
@@ -48,6 +55,7 @@
 
 </body>
 </html>
+
 
 
 
