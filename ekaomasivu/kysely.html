@@ -78,14 +78,13 @@ const allQuestions = [
   {q: "Lempi väri?", options: ["Violetti", "Valkoinen", "Musta"], answer: "Valkoinen"},
   {q: "Mikä on seurakuntani nimi?", options: ["Coti", "Jude", "Mose"], answer: "Coti"},
   {q: "Mikä on lempi ruokani?", options: ["pitsa", "lohi", "pasta"], answer: "lohi"},
-  {q: "kesä työpaikkani?", options: ["raksa", "seurankunta", "kauppa"], answer: "raksa"},
-  {q: "miten pitkä olen?", options: ["182", "184", "185"], answer: "182"},
-  {q: "mikä lempi juoma merkkini on?", options: ["Jaffa", "Cocacola", "pepsi"], answer: "Jaffa"},
-  {q: "suurin piirteeni on?", options: ["tehokkuus", "ahkeruus", "totisuus"], answer: "tehokkuus"},
+  {q: "Kesätyöpaikkani?", options: ["raksa", "seurankunta", "kauppa"], answer: "raksa"},
+  {q: "Miten pitkä olen?", options: ["182", "184", "185"], answer: "182"},
+  {q: "Mikä lempi juoma merkkini on?", options: ["Jaffa", "Cocacola", "pepsi"], answer: "Jaffa"},
+  {q: "Suurin piirteeni on?", options: ["tehokkuus", "ahkeruus", "totisuus"], answer: "tehokkuus"},
   {q: "Armeijassa olin?", options: ["Lääkintämies", "Sotilas-poliisi", "normi jätkä"], answer: "Lääkintämies"},
-  {q: "minkä ikäisenä partani aikoi kasvamaan?", options: ["13", "14", "15"], answer: "13"},
+  {q: "Minkä ikäisenä partani alkoi kasvamaan?", options: ["13", "14", "15"], answer: "13"},
 ];
-
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -96,37 +95,71 @@ function shuffle(arr) {
 }
 
 const questions = shuffle(allQuestions).slice(0, 10);
-let index = 0;
+let current = 0;
+let score = 0;
 
-const quiz = document.getElementById("quiz");
+const quizDiv = document.getElementById('quiz');
+const resultDiv = document.getElementById('result');
+const restartBtn = document.getElementById('restart');
 
 function showQuestion() {
-  quiz.innerHTML = "";
+  quizDiv.innerHTML = "";
+  if (current >= questions.length) return showResult();
 
-  if (index >= questions.length) {
-    quiz.innerHTML = "<h3>Kaikki 10 kysymystä käyty!</h3>";
-    return;
-  }
+  const qObj = questions[current];
+  const qElem = document.createElement('div');
+  qElem.innerHTML = `<h3>${current + 1}. ${qObj.q}</h3>`;
 
-  const qObj = questions[index];
-  const box = document.createElement("div");
-
-  box.innerHTML = `<h3>${index + 1}. ${qObj.q}</h3>`;
-
-  // näytä vaihtoehdot
-  qObj.options.forEach(opt => {
-    const btn = document.createElement("button");
-    btn.textContent = opt;
-    btn.onclick = () => {
-      index++;
-      showQuestion();
-    };
-    box.appendChild(btn);
+  shuffle([...qObj.options]).forEach(option => {
+    const btn = document.createElement('button');
+    btn.textContent = option;
+    btn.onclick = () => checkAnswer(btn, qObj.answer);
+    qElem.appendChild(btn);
   });
 
-  quiz.appendChild(box);
+  quizDiv.appendChild(qElem);
 }
 
+function checkAnswer(button, correct) {
+  const buttons = quizDiv.querySelectorAll('button');
+  buttons.forEach(b => b.disabled = true);
+
+  if (button.textContent === correct) {
+    button.classList.add('correct');
+    score++;
+  } else {
+    button.classList.add('wrong');
+    buttons.forEach(b => {
+      if (b.textContent === correct) b.classList.add('correct');
+    });
+  }
+
+  setTimeout(() => {
+    current++;
+    showQuestion();
+  }, 1000);
+}
+
+function showResult() {
+  quizDiv.innerHTML = "";
+
+  let msg =
+    score >= 9 ? "Olet tietäjä!" :
+    score >= 6 ? "Voit vielä vähän kertailla tietoja." :
+                 "Kannattaa jatkaa lukemista.";
+
+  resultDiv.innerHTML = `Tuloksesi: ${score}/10 <br>${msg}`;
+  restartBtn.style.display = "block";
+}
+
+restartBtn.addEventListener("click", () => {
+  current = 0;
+  score = 0;
+  shuffle(allQuestions);
+  resultDiv.innerHTML = "";
+  restartBtn.style.display = "none";
+  showQuestion();
+});
 showQuestion();
 </script>
 
@@ -136,6 +169,7 @@ showQuestion();
 </body>
 
 </html>
+
 
 
 
