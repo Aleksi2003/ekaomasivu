@@ -73,19 +73,18 @@ button:hover {
 
 <script>
 
-const allQuestions=[
- {q:"Mitä näistä olen harrastanut eniten?",options:["Paini","Sähly","Kartin autoilu"],answer:"Paini"},
- {q:"Lempi väri?",options:["Violetti","Valkoinen","Musta"],answer:"Valkoinen"},
- {q:"Mikä on seurakuntani nimi?",options:["Coti","Jude","Mose"],answer:"Coti"},
- {q:"Mikä on lempi ruokani?",options:["pitsa","lohi","pasta"],answer:"lohi"},
- {q:"Kesätyöpaikkani?",options:["raksa","seurankunta","kauppa"],answer:"raksa"},
- {q:"Miten pitkä olen?",options:["182","184","185"],answer:"182"},
- {q:"Mikä lempi juoma merkkini on?",options:["Jaffa","Cocacola","pepsi"],answer:"Jaffa"},
- {q:"Suurin piirteeni on?",options:["tehokkuus","ahkeruus","totisuus"],answer:"tehokkuus"},
- {q:"Armeijassa olin?",options:["Lääkintämies","Sotilas-poliisi","normi jätkä"],answer:"Lääkintämies"},
- {q:"Minkä ikäisenä partani alkoi kasvamaan?",options:["13","14","15"],answer:"13"}
+const allQuestions = [
+ {q:"Mitä näistä olen harrastanut eniten?", options:["Paini","Sähly","Karting-autoilu"], answer:"Paini"},
+ {q:"Lempiväri?", options:["Violetti","Valkoinen","Musta"], answer:"Valkoinen"},
+ {q:"Mikä on seurakuntani nimi?", options:["Coti","Jude","Mose"], answer:"Coti"},
+ {q:"Mikä on lempiruokani?", options:["Pizza","Lohi","Pasta"], answer:"Lohi"},
+ {q:"Kesätyöpaikkani?", options:["Raksa","Seurakunta","Kauppa"], answer:"Raksa"},
+ {q:"Kuinka pitkä olen?", options:["182","184","185"], answer:"182"},
+ {q:"Mikä on lempijuomamerkkini?", options:["Jaffa","Coca-Cola","Pepsi"], answer:"Jaffa"},
+ {q:"Suurin piirteeni on?", options:["Tehokkuus","Ahkeruus","Totisuus"], answer:"Tehokkuus"},
+ {q:"Armeijassa olin?", options:["Lääkintämies","Sotilaspoliisi","Tavallinen sotilas"], answer:"Lääkintämies"},
+ {q:"Minkä ikäisenä partani alkoi kasvaa?", options:["13","14","15"], answer:"13"}
 ];
-
 const S=a=>{for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 let q=S([...allQuestions]),i=0,score=0;
@@ -143,6 +142,7 @@ show();
 </body>
 
 </html>
+
 
 
 
